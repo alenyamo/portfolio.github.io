@@ -1,10 +1,17 @@
-<?php $name = $_POST['name'];
-$email = $_POST['email'];
-$message = $_POST['message'];
-$formcontent="From: $name \n Message: $message";
-$recipient = "alenyamo@gmail.com";
-$subject = "Website Encounters!";
-$mailheader = "From: $email \r\n";
-/*mail($recipient, $subject, $formcontent, $mailheader) or die("Error!");*/
-echo "Thank You!";
+<?php 
+if(isset($_POST['submit'])){
+    $to = "alenyamo@gmail.com"; 
+    $from = $_POST['email']; 
+    $name = $_POST['name'];
+    $subject = "You've got mail!";
+    $message = $fname . " wrote the following:" . "\n\n" . $_POST['message'];
+    $message2 = "Here is a copy of your message " . $name . "\n\n" . $_POST['message'];
+
+    $headers = "From:" . $from;
+    $headers2 = "From:" . $to;
+    mail($to,$subject,$message,$headers);
+    mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
+    echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
+    // You can also use header('Location: thank_you.php'); to redirect to another page.
+    }
 ?>
